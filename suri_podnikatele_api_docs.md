@@ -2,20 +2,40 @@
 
 *Paninaro digital - Jan Půlpán - verze 1 - 18.4.2017*
 
+
+Obsah
+=================
+
+   * [SURI podnikatele - API dokumentace](#suri-podnikatele---api-dokumentace)
+      * [1. Základní info](#1-základní-info)
+      * [2. Kroky pro uzavření pojištění](#2-kroky-pro-uzavření-pojištění)
+      * [3. Návratové hodnoty](#3-návratové-hodnoty)
+      * [4. Endpoints](#4-endpoints)
+         * [insurance](#insurance)
+            * [Insurance info](#insurance-info)
+            * [Vytvoření Insurance](#vytvoření-insurance)
+            * [Změna Insurance](#změna-insurance)
+            * [Částečná změna Insurance](#Částečná-změna-insurance)
+         * [assets-participations](#assets-participations)
+         * [liability-limits](#liability-limits)
+         * [liability-participations](#liability-participations)
+         * [ares-info](#ares-info)
+
+
 ## 1. Základní info
   - api je veřejné, bez přihlašování
 
 ## 2. Kroky pro uzavření pojištění
 
 
-## 4. Návratové hodnoty
+## 3. Návratové hodnoty
 - 200 - OK (GET a PUT)
 - 201 - created (v případě POST, PATCH)
 
 
-## 5. Endpoints
+## 4. Endpoints
 
-### Insurance
+### insurance
 #### Insurance info
 Vrací dostupné info o Pojistění.
 
@@ -86,7 +106,7 @@ POST /api/v1/insurance/
 }
 ```
 
-#### Response
+*Response*
 ```
 HTTP 201 Created
 {
@@ -268,7 +288,7 @@ HTTP 201 Created
 
 
 
-#### assets-participations
+### assets-participations
 Vrací seznam spoluúčastí pro pojištění majetku.
 
 |   |   |
@@ -304,7 +324,7 @@ HTTP 200 OK
 ```
 
 
-#### liability-limits
+### liability-limits
 Vrací seznam hodnot limitů plnění pro pojištění odpovědnosti.
 
 |   |   |
@@ -344,7 +364,7 @@ HTTP 200 OK
 ```
 
 
-#### liability-participations
+### liability-participations
 Vrací seznam spoluúčastí pro pojištění odpovědnosti.
 
 |   |   |
@@ -379,7 +399,7 @@ HTTP 200 OK
 ```
 
 
-#### ares-info
+### ares-info
 Na základě IČO vrátí informace o firmě.
 
 |   |   |
