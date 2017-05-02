@@ -6,7 +6,6 @@
 Obsah
 =================
 
-   * [SURI podnikatele - API dokumentace](#suri-podnikatele---api-dokumentace)
       * [1. Základní info](#1-základní-info)
       * [2. Kroky pro uzavření pojištění](#2-kroky-pro-uzavření-pojištění)
       * [3. Návratové hodnoty](#3-návratové-hodnoty)
@@ -16,6 +15,9 @@ Obsah
             * [Vytvoření Insurance](#vytvoření-insurance)
             * [Změna Insurance](#změna-insurance)
             * [Částečná změna Insurance](#Částečná-změna-insurance)
+         * [conclude-insurance](#conclude-insurance)
+         * [liability-rates](#liability-rates)
+         * [assets-rates](#assets-rates)
          * [assets-participations](#assets-participations)
          * [liability-limits](#liability-limits)
          * [liability-participations](#liability-participations)
@@ -286,6 +288,158 @@ HTTP 201 Created
 
 
 
+### conclude-insurance
+Uzavře vybrané insurance, vygeneruje dokumenty, pošle email a insurance označí jako uzavřené. Dále už nepůjde měnit.
+
+|   |   |
+|---|---|
+| GET | /api/v1/conclude-insurance/<insurance_id>/ |
+
+*Request*
+```
+GET /api/v1/conclude-insurance/1/
+```
+
+*Response*
+```
+HTTP 200 OK
+{
+    "id": 1,
+    "ico": "25918184",
+    "company_name": "PFP s.r.o.",
+    "address_street": "Frýdlantská 494",
+    "address_city": "Liberec",
+    "address_zip": "46001",
+    "liability": true,
+    "liability_limit": 1000000,
+    "liability_income": 1000000,
+    "liability_territory": true,
+    "liability_price": 1234,
+    "liability_program": 1,
+    "assets": true,
+    "assets_limit": 1000000,
+    "assets_price": 1234,
+    "assets_program": 2,
+    "acting_firstname": "Jan",
+    "acting_lasname": "Novák",
+    "acting_designation": "CEO",
+    "customer_phone": "12345678",
+    "customer_email": "",
+    "customer_postal_address_street": "",
+    "customer_postal_address_zip": "",
+    "customer_postal_address_city": "",
+    "contract_number": "12345678",
+    "confirm_personal_data": true,
+    "branches": [
+        {
+            "id": 18,
+            "address_street": "Sokolovské nám. 307",
+            "address_city": "Liberec 2",
+            "address_zip": "46001"
+        }
+    ]
+}
+```
+
+
+### liability-rates
+Vrací tabulku všech možných hodnot pojištění odpovědnosti podle vybraného limitu, spoluúčasti a teritoria.
+
+|   |   |
+|---|---|
+| GET | /api/v1/liability-rates/ |
+
+
+*Request*
+
+```
+GET /api/v1/assets-participations/
+```
+
+*Response*
+Jen část, celá odpověď má 96 bloků.
+```
+HTTP 200 OK
+
+[
+    {
+        "id": 1,
+        "limit": 1000000,
+        "income": 1000000,
+        "territory_coef": 1.0,
+        "participation_coef": 1.0,
+        "basic": 700,
+        "standard": 1175,
+        "premium": 1650
+    },
+    {
+        "id": 2,
+        "limit": 1000000,
+        "income": 5000000,
+        "territory_coef": 1.0,
+        "participation_coef": 1.0,
+        "basic": 875,
+        "standard": 1375,
+        "premium": 1875
+    },
+    {
+        "id": 3,
+        "limit": 1000000,
+        "income": 10000000,
+        "territory_coef": 1.0,
+        "participation_coef": 1.0,
+        "basic": 1200,
+        "standard": 1700,
+        "premium": 2218
+    },
+    ...
+
+```
+
+
+### assets-rates
+Vrací tabulku hodnot pojištění majetku pro 3 programy a zvolený limit pojištění a spoluúčast.
+
+|   |   |
+|---|---|
+| GET | /api/v1/assets-rates/<assets-limit> |
+
+
+*Request*
+
+```
+GET /api/v1/assets-rates/1534000/
+```
+
+*Response*
+```
+HTTP 200 OK
+
+[
+    {
+        "limit": 1534000,
+        "participation_coef": 1.0,
+        "basic": 788,
+        "standard": 2256,
+        "premium": 1615
+    },
+    {
+        "limit": 1534000,
+        "participation_coef": 1.15,
+        "basic": 907,
+        "standard": 2594,
+        "premium": 1857
+    },
+    {
+        "limit": 1534000,
+        "participation_coef": 1.3,
+        "basic": 1025,
+        "standard": 2933,
+        "premium": 2100
+    }
+]
+
+```
 
 
 ### assets-participations
