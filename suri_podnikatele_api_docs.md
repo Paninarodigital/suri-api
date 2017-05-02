@@ -6,22 +6,22 @@
 Obsah
 =================
 
-      * [1. Základní info](#1-základní-info)
-      * [2. Kroky pro uzavření pojištění](#2-kroky-pro-uzavření-pojištění)
-      * [3. Návratové hodnoty](#3-návratové-hodnoty)
-      * [4. Endpoints](#4-endpoints)
-         * [insurance](#insurance)
-            * [Insurance info](#insurance-info)
-            * [Vytvoření Insurance](#vytvoření-insurance)
-            * [Změna Insurance](#změna-insurance)
-            * [Částečná změna Insurance](#Částečná-změna-insurance)
-         * [conclude-insurance](#conclude-insurance)
-         * [liability-rates](#liability-rates)
-         * [assets-rates](#assets-rates)
-         * [assets-participations](#assets-participations)
-         * [liability-limits](#liability-limits)
-         * [liability-participations](#liability-participations)
-         * [ares-info](#ares-info)
+* [1. Základní info](#1-základní-info)
+* [2. Kroky pro uzavření pojištění](#2-kroky-pro-uzavření-pojištění)
+* [3. Návratové hodnoty](#3-návratové-hodnoty)
+* [4. Endpoints](#4-endpoints)
+    * [insurance](#insurance)
+    * [Insurance info](#insurance-info)
+    * [Vytvoření Insurance](#vytvoření-insurance)
+    * [Změna Insurance](#změna-insurance)
+    * [Částečná změna Insurance](#Částečná-změna-insurance)
+  * [conclude-insurance](#conclude-insurance)
+  * [liability-rates](#liability-rates)
+  * [assets-rates](#assets-rates)
+  * [assets-participations](#assets-participations)
+  * [liability-limits](#liability-limits)
+  * [liability-participations](#liability-participations)
+  * [ares-info](#ares-info)
 
 
 ## 1. Základní info
