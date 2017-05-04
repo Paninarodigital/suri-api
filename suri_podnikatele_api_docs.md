@@ -554,7 +554,7 @@ HTTP 200 OK
 
 
 ### ares-info
-Na základě IČO vrátí informace o firmě.
+Na základě IČO vrátí informace o firmě. Součástí jsou i činnosti, které nelze pojistit. To zda činnost nelze pojistit je rozlišeno pro odpovědnost a majetek.
 
 |   |   |
 |---|---|
@@ -577,16 +577,9 @@ HTTP 200 OK
     "address_zip": "63900",
     "subjects": [
         {
-            "allowed": true,
-            "subject": "Činnost pojišťovacích zprostředkovatelů a samostatných likvidátorů pojistných událostí ve smyslu zákona č. 38/2004 Sb."
-        },
-        {
-            "allowed": true,
-            "subject": "Činnost investičního zprostředkovatele v rozsahu povolení uděleného podle zvláštního zákona"
-        },
-        {
-            "allowed": true,
-            "subject": "Výroba, obchod a služby neuvedené v přílohách 1 až 3 živnostenského zákona"
+            "liability": false,
+            "assets": false,
+            "subject": "Poradenská a konzultační činnost, zpracování odborných studií a posudků"
         }
     ]
 }
