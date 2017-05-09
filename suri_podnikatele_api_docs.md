@@ -45,6 +45,26 @@ Vrací dostupné info o Pojistění.
 |---|---|
 | GET | /api/v1/insurance/<insurance_id>/ |
 
+| Parametr | Popis | Hodnota |
+|---|---|---
+| id | databázové id   |   |
+| ico | IČO   |   |
+| company_name | jméno společnosti   |   |
+| address_street | adresa - ulice + číslo  |   |
+| address_city | adresa - město  |   |
+| address_zip | adresa - PSČ  |   |
+| liability | vybáno pojištění odpovědnosti  | true/false  |
+| liability_limit | limit plnění  |   |
+| liability_income | příjem/obrat   |   |
+| liability_territory | oblast | true=EU false=CZ  |
+| liability_price | částka za pojištění odpovědnosti   |   |
+| liability_program | vybraný program   |  1..basic, 2..standard, 3..premium 0 .. nic nevybrano |
+| assets |  vybráno pojištění majetku | true/false   |
+| assets_limit | limit plnění  |   |
+| assets_price | částka za pojištění majetku  |   |
+| assets_program | vybraný program   |  1..basic, 2..standard, 3..premium 0 .. nic nevybrano |
+| branches | seznam adres provozoven (maximálně 5)   |   |
+
 *Request*
 ```
 GET /api/v1/insurance/1/
@@ -53,16 +73,41 @@ GET /api/v1/insurance/1/
 *Response*
 ```
 HTTP 200 OK
-Content-Type: application/json
-
 {
-    "ico": "12345678",
-    "company_name": "Moje firma",
-    "address_street": "Rybalkova 59",
-    "address_city": "Praha 10",
-    "address_zip": "10100",
-    "liability_limit": 500000,
-    "assets_limit": 500000
+    "id": 20,
+    "ico": "25918184",
+    "company_name": "PFP s.r.o.",
+    "address_street": "Frýdlantská 210",
+    "address_city": "Liberec",
+    "address_zip": "46001",
+    "liability": true,
+    "liability_limit": 1000000,
+    "liability_income": 1000000,
+    "liability_territory": false,
+    "liability_price": 5865,
+    "liability_program": 2,
+    "assets": true,
+    "assets_limit": 500000,
+    "assets_price": 2134,
+    "assets_program": 2,
+    "acting_firstname": "",
+    "acting_lasname": "",
+    "acting_designation": "",
+    "customer_phone": "600123456",
+    "customer_email": "novak@test.cz",
+    "customer_postal_address_street": "",
+    "customer_postal_address_zip": "",
+    "customer_postal_address_city": "",
+    "contract_number": "20",
+    "confirm_personal_data": true,
+    "branches": [
+        {
+            "id": 24,
+            "address_street": "Frýdlantská 210",
+            "address_city": "Liberec",
+            "address_zip": "46001"
+        }
+    ]
 }
 ```
 
