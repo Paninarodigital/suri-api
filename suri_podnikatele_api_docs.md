@@ -1,6 +1,6 @@
 # SURI podnikatele - API dokumentace
 
-*Paninaro digital - Jan Půlpán - verze 1 - 18.4.2017*
+*Paninaro digital - Jan Půlpán - verze 1 - update 14.5.2017*
 
 
 Obsah
