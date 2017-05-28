@@ -444,7 +444,7 @@ HTTP 201 Created
 ### conclude-insurance
 Uzavře vybrané insurance, vygeneruje dokumenty, pošle email a insurance označí jako uzavřené. Jednou uzavřené pojištění již nelze měnit (PUT a PATCH na [insurance](#vytvoření-insurance) vrací 400 BAD REQUEST.
 
-Pozn: conclude-insurance bude vracet ještě seznam vygenerovaných dokumentů, jako linky
+Response obsahuje i názvy vygenerovaných souborů a jejich popis. Sobory lze získat na adrese http://<adresa serveru>/media/tmp/<nazev souboru>.
 
 |   |   |
 |---|---|
@@ -459,58 +459,67 @@ GET /api/v1/conclude-insurance/KCP6HK43OBSZ231LNG74IB7IBEIB0G/
 ```
 HTTP 200 OK
 {
-    "acting_designation": "",
-    "acting_name": "Karel Test",
-    "address_city": "Liberec",
-    "address_street": "Frýdlantská 210",
-    "address_zip": "46001",
-    "assets": true,
-    "assets_limit": 5000000,
-    "assets_price": 3627,
-    "assets_program": 3,
-    "branches": [
-        {
-            "address_city": "Liberec",
-            "address_street": "Frýdlantská 210",
-            "address_zip": "46001",
-            "id": 103
-        },
-        {
-            "address_city": "Praha 7",
-            "address_street": "Jankovcova 1595",
-            "address_zip": "170 00",
-            "id": 104
-        }
-    ],
-    "calendar": "15. 6. 2017, 1. 12. 2017",
+    "insurance_id": "E1GFVBINNVQW2V25EUL9V8ICGLOFUR",
+    "ico": "25918184",
     "company_name": "PFP s.r.o.",
-    "confirm_personal_data": true,
-    "contract_number": "100",
-    "customer_email": "karel@test.cz",
-    "customer_phone": "603123456",
-    "customer_postal_address_city": "",
+    "address_street": "Frýdlantská 210",
+    "address_city": "Liberec",
+    "address_zip": "46001",
+    "liability": true,
+    "liability_limit": 1000000,
+    "liability_income": 5000000,
+    "liability_territory": false,
+    "liability_price": 1375,
+    "liability_program": 2,
+    "assets": true,
+    "assets_limit": 1000000,
+    "assets_price": 1856,
+    "assets_program": 2,
+    "exc_subjects_supl": false,
+    "acting_name": "Karel Test",
+    "acting_designation": "",
+    "customer_phone": "777 777 777",
+    "customer_email": "karel@firma.zeme",
     "customer_postal_address_street": "",
     "customer_postal_address_zip": "",
+    "customer_postal_address_city": "",
+    "contract_number": "154",
+    "confirm_personal_data": true,
+    "start": "2017-06-01",
     "end": "2018-05-31",
-    "ico": "25918184",
-    "installment": 4013,
-    "installment_date": "2017-06-15",
-    "installment_frequency": 2,
-    "insurance_id": "KCP6HK43OBSZ231LNG74IB7IBEIB0G",
-    "liability": true,
-    "liability_income": 1000000,
-    "liability_limit": 1000000,
-    "liability_price": 4399,
-    "liability_program": 3,
-    "liability_territory": true,
-    "price": 8026,
-    "start": "2017-06-01"
+    "price": 3231,
+    "installment_frequency": 3,
+    "installment": 807,
+    "calendar": "11. 6. 2017, 1. 9. 2017, 1. 12. 2017, 1. 3. 2018",
+    "installment_date": "2017-06-11T08:30:16.269039Z",
+    "branches": [
+        {
+            "id": 159,
+            "address_street": "Frýdlantská 210",
+            "address_city": "Liberec",
+            "address_zip": "46001"
+        }
+    ],
+    "documents": [
+        {
+            "link": "154_SURI_PODNIKATELE_MAJETEK_ODPOVEDNOST.pdf",
+            "name": "pojistná smlouva"
+        },
+        {
+            "link": "154_SURI_PODNIKATELE_ZAZNAM_JEDNANI.pdf",
+            "name": "záznam z jednání"
+        },
+        {
+            "link": "154_1701_SURI_PRIKAZKUHRADE.pdf",
+            "name": "prikaz k uhrade"
+        }
+    ]
 }
 ```
 
 
 ### liability-rates
-Vrací tabulku všech možných hodnot pojištění odpovědnosti podle vybraného limitu, spoluúčasti a teritoria.
+Vrací tabulku všech možných hodnot pojištění odpovědnosti podle vybraného limitu, spoluúčasti, teritoria a případného připojištění nepojistitelných činností.
 
 |   |   |
 |---|---|
@@ -520,7 +529,7 @@ Vrací tabulku všech možných hodnot pojištění odpovědnosti podle vybrané
 *Request*
 
 ```
-GET /api/v1/assets-participations/
+GET /api/v1/liability-rates/
 ```
 
 *Response*
@@ -530,36 +539,39 @@ HTTP 200 OK
 
 [
     {
-        "id": 1,
+        "id": 96,
         "limit": 1000000,
         "income": 1000000,
         "territory_coef": 1.0,
         "participation_coef": 1.0,
         "basic": 700,
         "standard": 1175,
-        "premium": 1650
+        "premium": 1650,
+        "exc_subjects_coef": 1.0
     },
     {
-        "id": 2,
+        "id": 97,
         "limit": 1000000,
         "income": 5000000,
         "territory_coef": 1.0,
         "participation_coef": 1.0,
         "basic": 875,
         "standard": 1375,
-        "premium": 1875
+        "premium": 1875,
+        "exc_subjects_coef": 1.0
     },
     {
-        "id": 3,
+        "id": 98,
         "limit": 1000000,
         "income": 10000000,
         "territory_coef": 1.0,
         "participation_coef": 1.0,
         "basic": 1200,
         "standard": 1700,
-        "premium": 2218
+        "premium": 2218,
+        "exc_subjects_coef": 1.0
     },
-    ... a tak dále. Celkem 96 položek
+    ... a tak dále. Celkem 144 položek
 
 ```
 
@@ -724,7 +736,7 @@ HTTP 200 OK
 
 
 ### ares-info
-Na základě IČO vrátí informace o firmě. Součástí jsou i činnosti, které nelze pojistit. To zda činnost nelze pojistit je rozlišeno pro odpovědnost a majetek. False znamená že pro dannou čínnost nelze pojištění uzavřít.
+Na základě IČO vrátí informace o firmě. Součástí jsou i činnosti, které nelze pojistit. To zda činnost nelze pojistit je rozlišeno pro odpovědnost a majetek (majetek=assets, odpovědnost=liability). False znamená že pro dannou čínnost nelze pojištění uzavřít. Pokud lze činnost pro odpovědnost připojistit, tak suplement = true)
 
 |   |   |
 |---|---|
@@ -733,23 +745,24 @@ Na základě IČO vrátí informace o firmě. Součástí jsou i činnosti, kter
 
 *Request*
 ```
-GET /api/v1/ares-info/48391301/
+GET /api/v1/ares-info/25918184/
 ```
 
 *Response*
 ```
 HTTP 200 OK
 {
-    "ico": "48391301",
-    "company_name": "RENOMIA, a. s.",
-    "address_street": "Holandská 874",
-    "address_city": "Brno",
-    "address_zip": "63900",
+    "ico": "25918184",
+    "company_name": "PFP s.r.o.",
+    "address_street": "Frýdlantská 210",
+    "address_city": "Liberec",
+    "address_zip": "46001",
     "subjects": [
         {
             "liability": false,
+            "suplement": true,
             "assets": false,
-            "subject": "Poradenská a konzultační činnost, zpracování odborných studií a posudků"
+            "subject": "Velkoobchod a maloobchod"
         }
     ]
 }
