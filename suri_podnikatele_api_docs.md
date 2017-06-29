@@ -16,6 +16,7 @@ Obsah
         * [Změna Insurance](#změna-insurance)
         * [Částečná změna Insurance](#Částečná-změna-insurance)
     * [conclude-insurance](#conclude-insurance)
+    * [pay-insurance](#pay-insurance)
     * [liability-rates](#liability-rates)
     * [assets-rates](#assets-rates)
     * [assets-participations](#assets-participations)
@@ -35,6 +36,7 @@ Toto je doporučený postup pro uzavření pojištění:
 - updatovat (i opakovaně) parametry pojištění PATCH [insurance](#vytvoření-insurance) - je třeba nastavovat jak všechny parametry, tak i vybranou cenu pojištění podle tabulek
 - nastavení kontakních údajů, potvrzení o souhlasu se zpracováním soukromých údajů PATCH [insurance](#vytvoření-insurance)
 - uzavřít pojištění [conclude-insurance](#conclude-insurance) (jednou uzavřené pojištění již nelze měnit)
+- zaplatit pojištění [pay-insurance](#pay-insurance) nepovinný krok. Link na zaplacení se posílá i do mailu. 
 
 
 ## 3. Návratové hodnoty
@@ -514,6 +516,27 @@ HTTP 200 OK
             "name": "prikaz k uhrade"
         }
     ]
+}
+```
+
+
+### pay-insurance
+Vytvoří link pro zaplacení vybraného pojištění. Tento link je pak třeba z klienta otevřít. Po dokončení platby přesměrovává brána zpět na klienta a je třeba toto přesměrování obsloužit. Více informací na https://data.comgate.cz/assets/payments/doc/ComGate_Payments_interface_protocol_HTTP_POST_cs_v1.0.pdf?v=113
+
+|   |   |
+|---|---|
+| GET | /api/v1/pay-insurance/<insurance_id>/ |
+
+*Request*
+```
+GET /api/v1/pay-insurance/KCP6HK43OBSZ231LNG74IB7IBEIB0G/
+```
+
+*Response*
+```
+HTTP 200 OK
+{
+    "url": "https://payments.comgate.cz/client/instructions/index?id=CPGB-BTN9-FKMI"
 }
 ```
 
